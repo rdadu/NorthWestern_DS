@@ -1,9 +1,9 @@
 // from data.js
 var UFOData = data;
 
-var filter = d3.select("#filter-btn");
+var submit = d3.select("#filter-btn");
 
-filter.on("click", function() {
+submit.on("click", function() {
 
     // Prevent the page from refreshing
     d3.event.preventDefault();
@@ -12,17 +12,20 @@ filter.on("click", function() {
   var getdate = d3.select("#datetime");
 
   // Get the value property of the input element
-  var sdate = getdate.property("value");
+  var sDate = getdate.property("value");
+  console.log(sDate);
 
-  var filteredData = UFOData.filter(UFOData => UFOData.datetime === sDate);
+  var filteredData = UFOData.filter(UFO => UFO.datetime === sDate);
+
+  console.log(filteredData);
 
     // We can use d3 to see the object that dispatched the event
     // Append one cell for each sighting
+
     var tbody = d3.select("tbody");
 
-
     data.forEach(function(filteredData) {
-        console.log(filteredData);
+        
         var row = tbody.append("tr");
 
             Object.entries(filteredData).forEach(function([key, value]) {
