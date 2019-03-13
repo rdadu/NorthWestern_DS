@@ -17,19 +17,19 @@ submit.on("click", function() {
 
   var filteredData = UFOData.filter(UFO => UFO.datetime === sDate);
 
-  console.log(filteredData);
+ console.log(filteredData);
 
     // We can use d3 to see the object that dispatched the event
     // Append one cell for each sighting
 
     var tbody = d3.select("tbody");
 
-    data.forEach(function(filteredData) {
+    filteredData.forEach(function(site) {
         
         var row = tbody.append("tr");
 
-            Object.entries(filteredData).forEach(function([key, value]) {
-            console.log(key, value);
+            Object.entries(site).forEach(function([key, value]) {
+            //console.log(key, value);
             var cell = tbody.append("td");
             cell.text(value);
             });
