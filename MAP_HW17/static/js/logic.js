@@ -1,7 +1,6 @@
 //Level 1: Basic Visualization
 //Step 1 - Get the JSON Data for EarthQuakes
 
-//function createMap(bikeStations) {
 function createMap(earthquakeLocs) {
   // Create the tile layer that will be the background of our map
   var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token={accessToken}", {
@@ -23,7 +22,7 @@ function createMap(earthquakeLocs) {
 
   // Create the map object with options
   var map = L.map("map-id", {
-    center: [40.73, -74.0059],
+    center: [54.5260, -105.2551],
     zoom: 12,
     layers: [lightmap, earthquakeLocs]
   });
@@ -36,7 +35,7 @@ function createMap(earthquakeLocs) {
 
 function createMarkers(response) {
 
-  // Pull the "stations" property off of response.data
+  // Pull the "locations" property off of response.data
   var locations = response.data.locations;
 
   // Initialize an array to hold earthquake markers
@@ -46,16 +45,10 @@ function createMarkers(response) {
   for (var index = 0; index < locations.length; index++) {
     var location = locations[index];
 
-    // For each station, create a marker and bind a popup with the station's name
-    //"geometry": {
-        // "type": "Point",
-        // "coordinates": [
-        //   -150.8627,
-        //   59.7315,
-        //   36.7
-     // ]
-    var eqMarker = L.marker([location.lat, location.lon])
-      .bindPopup("<h3>" + location.place + "<h3><h3>Magitude: " + location.mag + "<h3>");
+    // For each report, create a marker and bind a popup with the earthquake's location name
+
+    var eqMarker = L.marker([geometry.coordinates])
+      .bindPopup("<h3>" + features.properties.place  + "<h3><h3>Magitude: " + features.properties.mag + "<h3>");
 
     // Add the marker to the bikeMarkers array
     eqMarkers.push(eqMarker);
@@ -66,11 +59,11 @@ function createMarkers(response) {
 }
 
 
-// Perform an API call to the Citi Bike API to get station information. Call createMarkers when complete
+// Perform an API call to the earthquake API to get reportable activity information. Call createMarkers when complete
 //d3.json("https://gbfs.citibikenyc.com/gbfs/en/station_information.json", createMarkers);
 
 
 
-d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson", createMarkers);
+d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson", createMarkers);
 
 
