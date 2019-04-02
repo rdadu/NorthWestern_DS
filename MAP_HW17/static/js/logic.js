@@ -42,8 +42,8 @@ function createMarkers(response) {
   var eqMarkers = [];
 
   // Loop through the stations array
-  for (var index = 0; index < locations.length; index++) {
-    var location = locations[index];
+  for (var index = 0; index < features.length; index++) {
+    var feature = features[index];
 
     // For each report, create a marker and bind a popup with the earthquake's location name
 
